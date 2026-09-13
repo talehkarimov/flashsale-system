@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <ProjectReference Include="../../src/FlashSale.Api/FlashSale.Api.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../../src/FlashSale.Infrastructure/FlashSale.Infrastructure.csproj" />
+    <ProjectReference Include="../../src/PaymentSimulator.Api/PaymentSimulator.Api.csproj" />
+  </ItemGroup>
+</Project>
