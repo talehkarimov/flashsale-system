@@ -1,7 +1,5 @@
 # ADR-003: Asynchronous Payment and Consistency Model
 
-**Status:** Accepted
-
 ## Context
 
 Payment availability and latency must not extend the order creation transaction. Expiration must not release stock for a payment whose successful response was lost.
@@ -12,4 +10,4 @@ Return Pending after local creation commits. Process payment asynchronously and 
 
 ## Consequences
 
-Creation is independent of payment latency. Paid, Failed, and Expired remain consistent with the provider's terminal result. State is eventually consistent and clients must poll. An unavailable provider can extend reservations beyond their nominal deadline; blindly releasing ambiguous payments is rejected.
+Creation is independent of payment latency; clients poll for the terminal state. Paid, Failed, and Expired follow the provider's terminal result. Provider unavailability can retain reservations beyond the deadline because unresolved payments cannot safely release inventory.

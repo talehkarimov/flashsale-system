@@ -6,10 +6,8 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FlashSale.Infrastructure.Persistence.Migrations
 {
-    /// <inheritdoc />
     public partial class DatabaseOutboxScheduling : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<DateTimeOffset>(
@@ -22,7 +20,6 @@ namespace FlashSale.Infrastructure.Persistence.Migrations
                 oldType: "datetimeoffset");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AlterColumn<DateTimeOffset>(

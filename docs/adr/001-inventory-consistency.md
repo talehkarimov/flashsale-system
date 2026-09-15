@@ -1,10 +1,8 @@
 # ADR-001: Inventory Consistency Strategy
 
-**Status:** Accepted
-
 ## Context
 
-Purchase attempts can exceed available stock and arrive at different application instances. A read-check-write sequence cannot protect the inventory invariant.
+Competing orders can reserve the same products through different application instances. A multi-product order must either reserve every item or leave inventory unchanged.
 
 ## Decision
 

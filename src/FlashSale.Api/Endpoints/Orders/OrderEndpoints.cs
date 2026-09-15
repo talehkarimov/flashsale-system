@@ -19,6 +19,15 @@ internal static class OrderEndpoints
         return endpoints;
     }
 
+    /// <summary>Reserves inventory and queues asynchronous payment.</summary>
+    /// <remarks>Requires one Idempotency-Key header: 1-128 visible ASCII characters, scoped to the user.
+    /// Supply 1-20 distinct products with quantities of 1-10000. Replays match products and quantities
+    /// regardless of item order. Both success responses include a Location header for polling.</remarks>
+    /// <response code="201">A new Pending order was created.</response>
+    /// <response code="200">The matching order's current state was replayed.</response>
+    /// <response code="400">Invalid body or idempotency header.</response>
+    /// <response code="404">A requested product does not exist.</response>
+    /// <response code="409">Insufficient inventory or the key was reused with different items.</response>
     private static async Task<IResult> CreateOrderAsync(
         CreateOrderRequest request,
         HttpContext context,
@@ -35,6 +44,8 @@ internal static class OrderEndpoints
         return result.Replayed ? Results.Ok(response) : Results.Created(location, response);
     }
 
+    /// <summary>Returns the current order state; poll to observe asynchronous payment completion.</summary>
+    /// <response code="404">The order does not exist or the route ID is not a GUID.</response>
     private static async Task<IResult> GetOrderAsync(Guid id, GetOrderHandler handler, CancellationToken cancellationToken)
     {
         var order = await handler.HandleAsync(new GetOrderQuery(id), cancellationToken);

@@ -20,9 +20,6 @@ public static class PaymentResilienceExtensions
             policy.CircuitBreaker.MinimumThroughput = settings.MinimumThroughput;
             policy.CircuitBreaker.FailureRatio = settings.FailureRatio;
             policy.CircuitBreaker.BreakDuration = settings.BreakDuration;
-
-            // Keep the standard retry/breaker predicates: transport errors, timeouts, HTTP 408/429 and 5xx,
-            // excluding caller cancellation. POST retries are safe because the operation ID is stable.
         });
         return client;
     }

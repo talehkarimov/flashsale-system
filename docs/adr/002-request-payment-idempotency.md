@@ -1,10 +1,8 @@
 # ADR-002: Request and Payment Idempotency
 
-**Status:** Accepted
-
 ## Context
 
-Concurrent request retries can race. A payment timeout can hide a committed charge. Request identity and diagnostic correlation serve different purposes.
+Concurrent order retries must not reserve stock twice. A payment timeout can hide a committed charge, including when the reservation deadline has passed.
 
 ## Decision
 

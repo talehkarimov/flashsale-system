@@ -4,10 +4,8 @@
 
 namespace FlashSale.Infrastructure.Persistence.Migrations
 {
-    /// <inheritdoc />
     public partial class AlignModel : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddCheckConstraint(
@@ -21,7 +19,6 @@ namespace FlashSale.Infrastructure.Persistence.Migrations
                 sql: "([LeaseToken] IS NULL AND [LeaseUntil] IS NULL) OR ([LeaseToken] IS NOT NULL AND [LeaseUntil] IS NOT NULL)");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropCheckConstraint(
